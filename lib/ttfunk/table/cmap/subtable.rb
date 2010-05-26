@@ -46,6 +46,7 @@ module TTFunk
             case @format
               when 0 then extend(TTFunk::Table::Cmap::Format00)
               when 4 then extend(TTFunk::Table::Cmap::Format04)
+              when 12 then extend(TTFunk::Table::Cmap::Format12)
             end
 
             parse_cmap!
@@ -54,7 +55,8 @@ module TTFunk
 
         def unicode?
           platform_id == 3 && encoding_id == 1 && format == 4 ||
-          platform_id == 0 && format == 4
+          platform_id == 0 && format == 4 ||
+          platform_id == 3 && format == 12
         end
 
         def supported?
@@ -77,3 +79,4 @@ end
 
 require 'ttfunk/table/cmap/format00'
 require 'ttfunk/table/cmap/format04'
+require 'ttfunk/table/cmap/format12'
